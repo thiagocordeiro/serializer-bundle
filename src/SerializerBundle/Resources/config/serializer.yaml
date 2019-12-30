@@ -1,0 +1,12 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: true
+
+  Serializer\ClassFactory:
+    arguments:
+      $cachePath: '%kernel.cache_dir%'
+      $checkTimestamp: '%kernel.debug%'
+
+  Serializer\JsonSerializer: ~
