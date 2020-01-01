@@ -1,6 +1,6 @@
 parameters:
   serializer.cache_dir: '%kernel.cache_dir%'
-  serializer.check_timestamp: '%kernel.debug%'
+  serializer.check_timestamp: false
 
 services:
   _defaults:
@@ -10,7 +10,7 @@ services:
 
   Serializer\ClassFactory:
     arguments:
-      $cachePath: '%serializer.cache_dir%'
+      $cacheDir: '%serializer.cache_dir%'
       $checkTimestamp: '%serializer.check_timestamp%'
 
   Serializer\JsonSerializer: ~
