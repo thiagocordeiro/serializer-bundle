@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bccf6c8923913bf4b89e604479ed5363",
+    "content-hash": "9545af619121ae113cdf51a19d0ad42a",
     "packages": [
         {
             "name": "psr/container",
@@ -1158,16 +1158,16 @@
         },
         {
             "name": "thiagocordeiro/serializer",
-            "version": "v1.0.0",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thiagocordeiro/serializer.git",
-                "reference": "945d2f91f18ab7241a6cfd4f2f009dfb3629009e"
+                "reference": "1981395e0ef540fdb99ab0e803d63562f9fc3ac0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thiagocordeiro/serializer/zipball/945d2f91f18ab7241a6cfd4f2f009dfb3629009e",
-                "reference": "945d2f91f18ab7241a6cfd4f2f009dfb3629009e",
+                "url": "https://api.github.com/repos/thiagocordeiro/serializer/zipball/1981395e0ef540fdb99ab0e803d63562f9fc3ac0",
+                "reference": "1981395e0ef540fdb99ab0e803d63562f9fc3ac0",
                 "shasum": ""
             },
             "require": {
@@ -1197,7 +1197,7 @@
                     "email": "thiagoguetten@gmail.com"
                 }
             ],
-            "time": "2019-12-29T15:40:41+00:00"
+            "time": "2020-01-01T18:24:47+00:00"
         }
     ],
     "packages-dev": [
@@ -2899,5 +2899,8 @@
         "php": ">=7.2",
         "ext-json": "*"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "platform-overrides": {
+        "php": "7.2.26"
+    }
 }

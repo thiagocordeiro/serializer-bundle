@@ -34,6 +34,11 @@
       "Test\\Serializer\\": "tests/"
     }
   },
+  "config": {
+    "platform": {
+      "php": "7.2.26"
+    }
+  },
   "scripts": {
     "cs:check": "vendor/bin/phpcs --colors -ps",
     "test:stan": "vendor/bin/phpstan analyse src --level=max --ansi",
