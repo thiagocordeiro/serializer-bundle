@@ -1158,16 +1158,16 @@
         },
         {
             "name": "thiagocordeiro/serializer",
-            "version": "v1.0.1",
+            "version": "v1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thiagocordeiro/serializer.git",
-                "reference": "1981395e0ef540fdb99ab0e803d63562f9fc3ac0"
+                "reference": "834876c39f52d90dd1b4062af56b782626b10c7e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thiagocordeiro/serializer/zipball/1981395e0ef540fdb99ab0e803d63562f9fc3ac0",
-                "reference": "1981395e0ef540fdb99ab0e803d63562f9fc3ac0",
+                "url": "https://api.github.com/repos/thiagocordeiro/serializer/zipball/834876c39f52d90dd1b4062af56b782626b10c7e",
+                "reference": "834876c39f52d90dd1b4062af56b782626b10c7e",
                 "shasum": ""
             },
             "require": {
@@ -1197,7 +1197,7 @@
                     "email": "thiagoguetten@gmail.com"
                 }
             ],
-            "time": "2020-01-01T18:24:47+00:00"
+            "time": "2020-01-05T18:40:31+00:00"
         }
     ],
     "packages-dev": [
