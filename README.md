@@ -79,8 +79,7 @@ parameters:
         - ...
 ```
 
-and on the same example above you can skip injecting both `\Serializer\Serializer` and `\Symfony\Component\HttpFoundation\Request`
-replacing by injecting the object.
+After setting up you will be able to inject this object, on the same example above the code will be much more simples.
 
 ```php
 ...
