@@ -1,16 +1,20 @@
 parameters:
-  serializer.cache_dir: '%kernel.cache_dir%'
-  serializer.check_timestamp: false
+    serializer.cache_dir: '%kernel.cache_dir%'
+    serializer.check_timestamp: false
+    serializer.value_objects: []
 
 services:
-  _defaults:
-    autowire: true
-    autoconfigure: true
-    public: true
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: true
 
-  Serializer\ClassFactory:
-    arguments:
-      $cacheDir: '%serializer.cache_dir%'
-      $checkTimestamp: '%serializer.check_timestamp%'
+    Serializer\ClassFactory:
+        arguments:
+            $cacheDir: '%serializer.cache_dir%'
+            $checkTimestamp: '%serializer.check_timestamp%'
 
-  Serializer\JsonSerializer: ~
+    Serializer\JsonSerializer: ~
+    Serializer\Serializer: '@Serializer\JsonSerializer'
+
+    Serializer\SerializerBundle\ValueObjectFactory: ~
