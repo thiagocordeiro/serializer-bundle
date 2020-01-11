@@ -69,13 +69,14 @@ class CreateUserController
 #### Inject Value Objects on Controllers
 You can also inject objects on controller, internally the bundle will create the object from request body.
 For this to happen you have to tell the bundle which objects should be created,
-to do so create a yaml file at `config/packages/serializer.yaml` with the following configuration:
+to do so, create a yaml file at `config/packages/serializer.yaml` with the class names:
 ```yaml
 # config/packages/serializer.yaml - note it should not be on env(dev/prod) folder)
 parameters:
     serializer.value_objects:
         - 'App\Domain\User\CreateUser'
         - 'App\Domain\User\UserCreated'
+        - ...
 ```
 
 and on the same example above you can skip injecting both `\Serializer\Serializer` and `\Symfony\Component\HttpFoundation\Request`
