@@ -18,7 +18,7 @@ class ValueObjectServiceCompiler implements CompilerPassInterface
         array_map(function (string $id) use ($container) : void {
             $definition = new Definition($id);
             $definition->addArgument($id);
-            $definition->setFactory(new Reference(ValueObjectFactory::class));
+            $definition->setFactory(new Reference(HttpValueObjectFactory::class));
 
             $container->setDefinition($id, $definition);
         }, $classes);
