@@ -17,4 +17,4 @@ services:
     Serializer\JsonSerializer: ~
     Serializer\Serializer: '@Serializer\JsonSerializer'
 
-    Serializer\SerializerBundle\ValueObjectFactory: ~
+    Serializer\SerializerBundle\DependencyInjection\ValueObjectFactory: ~
