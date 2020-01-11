@@ -18,3 +18,8 @@ services:
     Serializer\Serializer: '@Serializer\JsonSerializer'
 
     Serializer\SerializerBundle\DependencyInjection\ValueObjectFactory: ~
+
+    # when controller returns a value object, then try to serialize and create a json response
+    Serializer\SerializerBundle\EventListener\ResponseSerializer:
+        tags:
+            - { name: kernel.event_listener, event: kernel.view, priority: 100 }
