@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Serializer\SerializerBundle\DependencyInjection;
 
+use Serializer\Exception\MissingOrInvalidProperty;
 use Serializer\Serializer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
-class ValueObjectFactory
+class HttpValueObjectFactory
 {
     /** @var Serializer */
     private $serializer;
@@ -28,11 +30,17 @@ class ValueObjectFactory
         $request = $this->requestStack->getCurrentRequest();
 
         if (!$request instanceof Request) {
-            throw new BadRequestHttpException();
+            throw new HttpException(Response::HTTP_BAD_REQUEST, 'Invalid Body');
         }
 
         $data = $request->getContent();
 
-        return $this->serializer->deserialize($data, $class);
+        try {
+            $object = $this->serializer->deserialize($data, $class);
+        } catch (MissingOrInvalidProperty $e) {
+            throw new HttpException(Response::HTTP_BAD_REQUEST, $e->getMessage(), $e);
+        }
+
+        return $object;
     }
 }
