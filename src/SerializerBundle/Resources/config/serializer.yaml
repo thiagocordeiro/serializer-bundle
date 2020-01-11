@@ -1,16 +1,25 @@
 parameters:
-  serializer.cache_dir: '%kernel.cache_dir%'
-  serializer.check_timestamp: false
+    serializer.cache_dir: '%kernel.cache_dir%'
+    serializer.check_timestamp: false
+    serializer.value_objects: []
 
 services:
-  _defaults:
-    autowire: true
-    autoconfigure: true
-    public: true
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: true
 
-  Serializer\ClassFactory:
-    arguments:
-      $cacheDir: '%serializer.cache_dir%'
-      $checkTimestamp: '%serializer.check_timestamp%'
+    Serializer\ClassFactory:
+        arguments:
+            $cacheDir: '%serializer.cache_dir%'
+            $checkTimestamp: '%serializer.check_timestamp%'
 
-  Serializer\JsonSerializer: ~
+    Serializer\JsonSerializer: ~
+    Serializer\Serializer: '@Serializer\JsonSerializer'
+
+    Serializer\SerializerBundle\DependencyInjection\ValueObjectFactory: ~
+
+    # when controller returns a value object, then try to serialize and create a json response
+    Serializer\SerializerBundle\EventListener\ResponseSerializer:
+        tags:
+            - { name: kernel.event_listener, event: kernel.view, priority: 100 }
