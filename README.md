@@ -76,7 +76,7 @@ parameters:
     serializer.value_objects:
         - 'App\Domain\User\CreateUser'
         - 'App\Domain\User\UserCreated'
-        - ...
+        - ... other classes you may want to add
 ```
 
 After setting up you will be able to inject this object, on the same example above the code will be much more simples.
