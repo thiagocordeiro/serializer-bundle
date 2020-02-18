@@ -7,6 +7,17 @@ A Symfony bundle for [`thiagocordeiro/serializer`](https://github.com/thiagocord
 ```
 composer require thiagocordeiro/serializer-bundle
 ```
+then enable the bundle by adding on `config/bundles.php`
+```php
+<?php
+
+return [
+    Symfony\Bundle\FrameworkBundle\FrameworkBundle::class => ['all' => true],
+    ...
+    Serializer\Serializer::class => ['all' => true],
+];
+
+```
 
 #### Configure
 It is possible to configure where the cache classes will be created `cache_dir` and `check_timestamp` for checking if class was changed so the cache gets updated.
