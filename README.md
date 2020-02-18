@@ -14,7 +14,7 @@ then enable the bundle by adding on `config/bundles.php`
 return [
     Symfony\Bundle\FrameworkBundle\FrameworkBundle::class => ['all' => true],
     ...
-    Serializer\Serializer::class => ['all' => true],
+    Serializer\SerializerBundle\SerializerBundle::class => ['all' => true],
 ];
 
 ```
