@@ -23,8 +23,6 @@ class ResponseSerializer
         $object = $event->getControllerResult();
 
         if ($object === null) {
-            $event->setResponse(new Response('', Response::HTTP_NO_CONTENT));
-
             return;
         }
 
