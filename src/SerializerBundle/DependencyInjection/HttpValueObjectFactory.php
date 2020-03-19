@@ -6,7 +6,6 @@ namespace Serializer\SerializerBundle\DependencyInjection;
 
 use Serializer\Exception\MissingOrInvalidProperty;
 use Serializer\Serializer;
-use Serializer\SerializerBundle\Exception\UnableToDeserializeBody;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
@@ -42,7 +41,7 @@ class HttpValueObjectFactory
         } catch (MissingOrInvalidProperty $e) {
             throw new HttpException(Response::HTTP_BAD_REQUEST, $e->getMessage(), $e);
         } catch (Throwable $e) {
-            throw new UnableToDeserializeBody($e);
+            throw new HttpException(Response::HTTP_BAD_REQUEST, 'Bad Request', $e);
         }
 
         return $object;
