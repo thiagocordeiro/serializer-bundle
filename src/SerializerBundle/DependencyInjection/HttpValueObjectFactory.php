@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace Serializer\SerializerBundle\DependencyInjection;
 
 use Serializer\Exception\MissingOrInvalidProperty;
-use Serializer\Exception\NotAValidJson;
 use Serializer\Serializer;
+use Serializer\SerializerBundle\Exception\UnableToDeserializeBody;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Throwable;
 
 class HttpValueObjectFactory
 {
@@ -38,8 +39,10 @@ class HttpValueObjectFactory
 
         try {
             $object = $this->serializer->deserialize($data, $class);
-        } catch (MissingOrInvalidProperty | NotAValidJson $e) {
+        } catch (MissingOrInvalidProperty $e) {
             throw new HttpException(Response::HTTP_BAD_REQUEST, $e->getMessage(), $e);
+        } catch (Throwable $e) {
+            throw new UnableToDeserializeBody($e);
         }
 
         return $object;
