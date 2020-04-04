@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c1e132b3d404009c28ac7cf21e4a5afe",
+    "content-hash": "7594c3e78fbb223ed57f6a197af49fd0",
     "packages": [
         {
             "name": "ocramius/package-versions",
@@ -1335,16 +1335,16 @@
         },
         {
             "name": "thiagocordeiro/serializer",
-            "version": "v1.4.1",
+            "version": "v1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thiagocordeiro/serializer.git",
-                "reference": "d6adadee3cc95d509021c367cbac3ea40b37d4a4"
+                "reference": "00340e46e2f490b5eb4cb11347da9c5ecbfee4bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thiagocordeiro/serializer/zipball/d6adadee3cc95d509021c367cbac3ea40b37d4a4",
-                "reference": "d6adadee3cc95d509021c367cbac3ea40b37d4a4",
+                "url": "https://api.github.com/repos/thiagocordeiro/serializer/zipball/00340e46e2f490b5eb4cb11347da9c5ecbfee4bc",
+                "reference": "00340e46e2f490b5eb4cb11347da9c5ecbfee4bc",
                 "shasum": ""
             },
             "require": {
@@ -1374,7 +1374,7 @@
                     "email": "thiagoguetten@gmail.com"
                 }
             ],
-            "time": "2020-03-19T18:29:13+00:00"
+            "time": "2020-04-04T16:46:51+00:00"
         },
         {
             "name": "zendframework/zend-code",
