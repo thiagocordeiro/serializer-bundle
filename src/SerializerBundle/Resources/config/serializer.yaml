@@ -1,7 +1,7 @@
 parameters:
     serializer.cache_dir: '%kernel.cache_dir%'
     serializer.check_timestamp: false
-    serializer.custom_factories_namespace: ''
+    serializer.custom_factories: []
     serializer.value_objects: []
 
 services:
@@ -14,7 +14,7 @@ services:
         arguments:
             $cacheDir: '%serializer.cache_dir%'
             $checkTimestamp: '%serializer.check_timestamp%'
-            $customFactoryNamespace: '%serializer.custom_factories_namespace%'
+            $customFactories: '%serializer.custom_factories%'
 
     Serializer\JsonSerializer: ~
     Serializer\Serializer: '@Serializer\JsonSerializer'
