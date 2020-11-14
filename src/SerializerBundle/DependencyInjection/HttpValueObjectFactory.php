@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Serializer\SerializerBundle\DependencyInjection;
 
 use Serializer\Exception\MissingOrInvalidProperty;
+use Serializer\Exception\SerializerException;
 use Serializer\Serializer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -26,6 +27,9 @@ class HttpValueObjectFactory
         $this->requestStack = $requestStack;
     }
 
+    /**
+     * @throws Throwable
+     */
     public function __invoke(string $class)
     {
         $request = $this->requestStack->getCurrentRequest();
@@ -40,6 +44,16 @@ class HttpValueObjectFactory
             $object = $this->serializer->deserialize($data, $class);
         } catch (MissingOrInvalidProperty $e) {
             throw new HttpException(Response::HTTP_BAD_REQUEST, $e->getMessage(), $e);
+        } catch (Throwable $e) {
+            if ($e instanceof SerializerException) {
+                /**
+                 * we don't want to suppress serializer exception as bad request once it's
+                 * since it is thrown when creating parser mappers
+                 */
+                throw new $e;
+            }
+
+            throw new HttpException(Response::HTTP_BAD_REQUEST, 'Bad Request', $e);
         }
 
         return $object;
