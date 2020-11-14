@@ -40,8 +40,6 @@ class HttpValueObjectFactory
             $object = $this->serializer->deserialize($data, $class);
         } catch (MissingOrInvalidProperty $e) {
             throw new HttpException(Response::HTTP_BAD_REQUEST, $e->getMessage(), $e);
-        } catch (Throwable $e) {
-            throw new HttpException(Response::HTTP_BAD_REQUEST, 'Bad Request', $e);
         }
 
         return $object;
