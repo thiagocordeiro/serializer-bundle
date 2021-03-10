@@ -1,8 +1,9 @@
 parameters:
     serializer.cache_dir: '%kernel.cache_dir%'
     serializer.check_timestamp: false
-    serializer.custom_factories: []
     serializer.value_objects: []
+    serializer.custom_encoders: []
+    serializer.custom_decoders: []
 
 services:
     _defaults:
@@ -10,11 +11,17 @@ services:
         autoconfigure: true
         public: true
 
-    Serializer\ClassFactory:
+    Serializer\EncoderFactory:
         arguments:
             $cacheDir: '%serializer.cache_dir%'
             $checkTimestamp: '%serializer.check_timestamp%'
-            $customFactories: '%serializer.custom_factories%'
+            $customEncoders: '%serializer.custom_encoders%'
+
+    Serializer\DecoderFactory:
+        arguments:
+            $cacheDir: '%serializer.cache_dir%'
+            $checkTimestamp: '%serializer.check_timestamp%'
+            $customDecoders: '%serializer.custom_decoders%'
 
     Serializer\JsonSerializer: ~
     Serializer\Serializer: '@Serializer\JsonSerializer'
