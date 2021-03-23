@@ -23,6 +23,7 @@ services:
             $checkTimestamp: '%serializer.check_timestamp%'
             $customDecoders: '%serializer.custom_decoders%'
 
+    Serializer\ArraySerializer: ~
     Serializer\JsonSerializer: ~
     Serializer\Serializer: '@Serializer\JsonSerializer'
 
