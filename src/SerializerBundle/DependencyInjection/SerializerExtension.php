@@ -15,7 +15,8 @@ class SerializerExtension extends Extension
     private const CONFIG_DIR = __DIR__ . '/../Resources/config';
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
+     * @param array<mixed> $configs
      * @throws Exception
      */
     public function load(array $configs, ContainerBuilder $container): void

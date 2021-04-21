@@ -11,9 +11,10 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class ValueObjectServiceCompiler implements CompilerPassInterface
 {
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         $classes = $container->getParameter('serializer.value_objects');
+        assert(is_array($classes));
 
         array_map(function (string $id) use ($container): void {
             $definition = new Definition($id);

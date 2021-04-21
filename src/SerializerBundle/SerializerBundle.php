@@ -10,7 +10,10 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class SerializerBundle extends Bundle
 {
-    public function build(ContainerBuilder $container)
+    /**
+     * @inheritdoc
+     */
+    public function build(ContainerBuilder $container): void
     {
         parent::build($container);
 

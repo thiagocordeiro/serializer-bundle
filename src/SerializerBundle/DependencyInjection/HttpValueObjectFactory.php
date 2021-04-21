@@ -32,14 +32,17 @@ class HttpValueObjectFactory
     }
 
     /**
+     * @template T of object
+     * @param class-string<T> $class
+     * @return T|array<T>
      * @throws Throwable
      */
-    public function __invoke(string $class)
+    public function __invoke(string $class): object|array|null
     {
         $request = $this->requestStack->getCurrentRequest();
 
         if (!$request instanceof Request) {
-            throw new HttpException(Response::HTTP_BAD_REQUEST, 'Invalid Body');
+            throw new HttpException(Response::HTTP_BAD_REQUEST, 'Invalid Request');
         }
 
         $serializer = $this->getSerializer($request);
@@ -49,15 +52,14 @@ class HttpValueObjectFactory
             $object = $serializer->deserialize($data, $class);
         } catch (MissingOrInvalidProperty $e) {
             throw new HttpException(Response::HTTP_BAD_REQUEST, $e->getMessage(), $e);
+        } catch (SerializerException $e) {
+            /**
+             * We don't want to suppress serializer exception as bad request
+             * since it is thrown when creating parser mappers.
+             * In other words, the class was not properly mapped
+             */
+            throw $e;
         } catch (Throwable $e) {
-            if ($e instanceof SerializerException) {
-                /**
-                 * we don't want to suppress serializer exception as bad request once it's
-                 * since it is thrown when creating parser mappers
-                 */
-                throw new $e;
-            }
-
             throw new HttpException(Response::HTTP_BAD_REQUEST, 'Bad Request', $e);
         }
 
@@ -72,6 +74,9 @@ class HttpValueObjectFactory
         };
     }
 
+    /**
+     * @return array<mixed>
+     */
     private function getData(Request $request): string|array
     {
         return match ($request->getContentType()) {
