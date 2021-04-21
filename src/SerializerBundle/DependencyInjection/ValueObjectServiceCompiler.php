@@ -15,7 +15,7 @@ class ValueObjectServiceCompiler implements CompilerPassInterface
     {
         $classes = $container->getParameter('serializer.value_objects');
 
-        array_map(function (string $id) use ($container) : void {
+        array_map(function (string $id) use ($container): void {
             $definition = new Definition($id);
             $definition->addArgument($id);
             $definition->setFactory(new Reference(HttpValueObjectFactory::class));

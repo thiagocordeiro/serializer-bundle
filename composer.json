@@ -3,14 +3,8 @@
   "description": "PHP Serializer Symfony Bundle",
   "type": "library",
   "license": "MIT",
-  "authors": [
-    {
-      "name": "Thiago Cordeiro",
-      "email": "thiagoguetten@gmail.com"
-    }
-  ],
   "require": {
-    "php": ">=7.3",
+    "php": ">=8.0",
     "ext-json": "*",
     "thiagocordeiro/serializer": "^2.0",
     "symfony/http-kernel": "^5.0",

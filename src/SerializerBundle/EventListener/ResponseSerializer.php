@@ -10,8 +10,7 @@ use Symfony\Component\HttpKernel\Event\ViewEvent;
 
 class ResponseSerializer
 {
-    /** @var Serializer */
-    private $serializer;
+    private Serializer $serializer;
 
     public function __construct(Serializer $serializer)
     {

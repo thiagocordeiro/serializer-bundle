@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Serializer\SerializerBundle\DependencyInjection;
 
+use Serializer\ArraySerializer;
 use Serializer\Exception\MissingOrInvalidProperty;
 use Serializer\Exception\SerializerException;
+use Serializer\JsonSerializer;
 use Serializer\Serializer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -15,15 +17,17 @@ use Throwable;
 
 class HttpValueObjectFactory
 {
-    /** @var Serializer */
-    private $serializer;
+    private JsonSerializer $jsonSerializer;
+    private ArraySerializer $arraySerializer;
+    private RequestStack $requestStack;
 
-    /** @var RequestStack */
-    private $requestStack;
-
-    public function __construct(Serializer $serializer, RequestStack $requestStack)
-    {
-        $this->serializer = $serializer;
+    public function __construct(
+        JsonSerializer $jsonSerializer,
+        ArraySerializer $arraySerializer,
+        RequestStack $requestStack
+    ) {
+        $this->jsonSerializer = $jsonSerializer;
+        $this->arraySerializer = $arraySerializer;
         $this->requestStack = $requestStack;
     }
 
@@ -38,10 +42,11 @@ class HttpValueObjectFactory
             throw new HttpException(Response::HTTP_BAD_REQUEST, 'Invalid Body');
         }
 
-        $data = $request->getContent();
+        $serializer = $this->getSerializer($request);
+        $data = $this->getData($request);
 
         try {
-            $object = $this->serializer->deserialize($data, $class);
+            $object = $serializer->deserialize($data, $class);
         } catch (MissingOrInvalidProperty $e) {
             throw new HttpException(Response::HTTP_BAD_REQUEST, $e->getMessage(), $e);
         } catch (Throwable $e) {
@@ -57,5 +62,24 @@ class HttpValueObjectFactory
         }
 
         return $object;
+    }
+
+    private function getSerializer(Request $request): Serializer
+    {
+        return match ($request->getContentType()) {
+            'json' => $this->jsonSerializer,
+            default => $this->arraySerializer,
+        };
+    }
+
+    private function getData(Request $request): string|array
+    {
+        return match ($request->getContentType()) {
+            'json' => (string) $request->getContent(),
+            default => array_merge(
+                $request->query->all(),
+                $request->request->all(),
+            ),
+        };
     }
 }
