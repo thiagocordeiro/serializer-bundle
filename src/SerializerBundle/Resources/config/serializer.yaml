@@ -4,7 +4,6 @@ parameters:
     serializer.value_objects: []
     serializer.custom_encoders: []
     serializer.custom_decoders: []
-    serializer.factories: []
 
 services:
     _defaults:
@@ -17,14 +16,12 @@ services:
             $cacheDir: '%serializer.cache_dir%'
             $checkTimestamp: '%serializer.check_timestamp%'
             $customEncoders: '%serializer.custom_encoders%'
-            $factories: '%serializer.factories%'
 
     Serializer\DecoderFactory:
         arguments:
             $cacheDir: '%serializer.cache_dir%'
             $checkTimestamp: '%serializer.check_timestamp%'
             $customDecoders: '%serializer.custom_decoders%'
-            $factories: '%serializer.factories%'
 
     Serializer\ArraySerializer: ~
     Serializer\JsonSerializer: ~
