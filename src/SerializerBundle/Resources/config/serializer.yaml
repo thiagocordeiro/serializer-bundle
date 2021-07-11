@@ -4,6 +4,8 @@ parameters:
     serializer.value_objects: []
     serializer.custom_encoders: []
     serializer.custom_decoders: []
+    serializer.file_user: ''
+    serializer.file_group: ''
 
 services:
     _defaults:
@@ -16,12 +18,16 @@ services:
             $cacheDir: '%serializer.cache_dir%'
             $checkTimestamp: '%serializer.check_timestamp%'
             $customEncoders: '%serializer.custom_encoders%'
+            $fileUser: '%serializer.file_user%'
+            $fileGroup: '%serializer.file_group%'
 
     Serializer\DecoderFactory:
         arguments:
             $cacheDir: '%serializer.cache_dir%'
             $checkTimestamp: '%serializer.check_timestamp%'
             $customDecoders: '%serializer.custom_decoders%'
+            $fileUser: '%serializer.file_user%'
+            $fileGroup: '%serializer.file_group%'
 
     Serializer\ArraySerializer: ~
     Serializer\JsonSerializer: ~
