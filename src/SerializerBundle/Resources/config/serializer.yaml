@@ -1,13 +1,10 @@
 parameters:
   serializer.cache_dir: '%kernel.cache_dir%'
-  serializer.check_timestamp: false
-  serializer.value_objects: [ ]
   serializer.custom_encoders: [ ]
   serializer.custom_decoders: [ ]
   serializer.encoder_factories: { }
   serializer.decoder_factories: { }
-  serializer.file_user: ''
-  serializer.file_group: ''
+  serializer.value_objects: [ ]
 
 services:
   _defaults:
@@ -15,31 +12,49 @@ services:
     autoconfigure: true
     public: true
 
-  Serializer\EncoderFactory:
-    arguments:
-      $cacheDir: '%serializer.cache_dir%'
-      $checkTimestamp: '%serializer.check_timestamp%'
-      $customEncoders: '%serializer.custom_encoders%'
-      $factories: '%serializer.encoder_factories%'
-      $fileUser: '%serializer.file_user%'
-      $fileGroup: '%serializer.file_group%'
-
-  Serializer\DecoderFactory:
-    arguments:
-      $cacheDir: '%serializer.cache_dir%'
-      $checkTimestamp: '%serializer.check_timestamp%'
-      $customDecoders: '%serializer.custom_decoders%'
-      $factories: '%serializer.decoder_factories%'
-      $fileUser: '%serializer.file_user%'
-      $fileGroup: '%serializer.file_group%'
-
   Serializer\ArraySerializer: ~
   Serializer\JsonSerializer: ~
   Serializer\Serializer: '@Serializer\JsonSerializer'
 
   Serializer\SerializerBundle\DependencyInjection\HttpValueObjectFactory: ~
 
-  # when controller returns a value object, then try to serialize and create a json response
+  # when controller returns an object rather than Symfony Http Response, then try to serialize into a json response
   Serializer\SerializerBundle\EventListener\ResponseSerializer:
     tags:
       - { name: kernel.event_listener, event: kernel.view, priority: 100 }
+
+  #
+  # DECODER
+  #
+  Serializer\Builder\Decoder\FileLoader\CustomDecoderFileLoader: { arguments: { $customDecoders: '%serializer.custom_decoders%' } }
+  Serializer\Builder\Decoder\FileLoader\FactoryDecoderFileLoader: { arguments: { $factories: '%serializer.decoder_factories%' } }
+  Serializer\Builder\Decoder\FileLoader\RequireDecoderFileLoader: { arguments: { $cacheDir: '%serializer.cache_dir%' } }
+  Serializer\Builder\Decoder\FileLoader\CreateDecoderFileLoader: { arguments: { $cacheDir: '%serializer.cache_dir%' } }
+
+  Serializer\Builder\Decoder\FileLoader\PipelineDecoderFileLoader:
+    arguments:
+      - '@Serializer\Builder\Decoder\FileLoader\CustomDecoderFileLoader'
+      - '@Serializer\Builder\Decoder\FileLoader\FactoryDecoderFileLoader'
+      - '@Serializer\Builder\Decoder\FileLoader\RequireDecoderFileLoader'
+      - '@Serializer\Builder\Decoder\FileLoader\CreateDecoderFileLoader'
+
+  Serializer\Builder\Decoder\DecoderFileLoader: '@Serializer\Builder\Decoder\FileLoader\PipelineDecoderFileLoader'
+  Serializer\Builder\Decoder\DecoderFactory: ~
+
+  #
+  # ENCODER
+  #
+  Serializer\Builder\Encoder\FileLoader\CustomEncoderFileLoader: { arguments: { $customEncoders: '%serializer.custom_encoders%' } }
+  Serializer\Builder\Encoder\FileLoader\FactoryEncoderFileLoader: { arguments: { $factories: '%serializer.encoder_factories%' } }
+  Serializer\Builder\Encoder\FileLoader\RequireEncoderFileLoader: { arguments: { $cacheDir: '%serializer.cache_dir%' } }
+  Serializer\Builder\Encoder\FileLoader\CreateEncoderFileLoader: { arguments: { $cacheDir: '%serializer.cache_dir%' } }
+
+  Serializer\Builder\Encoder\FileLoader\PipelineEncoderFileLoader:
+    arguments:
+      - '@Serializer\Builder\Encoder\FileLoader\CustomEncoderFileLoader'
+      - '@Serializer\Builder\Encoder\FileLoader\FactoryEncoderFileLoader'
+      - '@Serializer\Builder\Encoder\FileLoader\RequireEncoderFileLoader'
+      - '@Serializer\Builder\Encoder\FileLoader\CreateEncoderFileLoader'
+
+  Serializer\Builder\Encoder\EncoderFileLoader: '@Serializer\Builder\Encoder\FileLoader\PipelineEncoderFileLoader'
+  Serializer\Builder\Encoder\EncoderFactory: ~

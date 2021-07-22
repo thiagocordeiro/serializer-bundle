@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cb77d527d96f0e7710d059a18b681a45",
+    "content-hash": "b82590bd8c0f5e85a0f18fdcda98baa6",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -1804,16 +1804,16 @@
         },
         {
             "name": "thiagocordeiro/serializer",
-            "version": "3.1.2",
+            "version": "3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thiagocordeiro/serializer.git",
-                "reference": "b601d6be7ff5a0df143f654275f0bcc586c6e59c"
+                "reference": "32459439975366eccdaa586af13bac926e3606b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thiagocordeiro/serializer/zipball/b601d6be7ff5a0df143f654275f0bcc586c6e59c",
-                "reference": "b601d6be7ff5a0df143f654275f0bcc586c6e59c",
+                "url": "https://api.github.com/repos/thiagocordeiro/serializer/zipball/32459439975366eccdaa586af13bac926e3606b5",
+                "reference": "32459439975366eccdaa586af13bac926e3606b5",
                 "shasum": ""
             },
             "require": {
@@ -1838,9 +1838,9 @@
                 "MIT"
             ],
             "support": {
-                "source": "https://github.com/thiagocordeiro/serializer/tree/3.1.2"
+                "source": "https://github.com/thiagocordeiro/serializer/tree/3.2.0"
             },
-            "time": "2021-07-19T10:57:06+00:00"
+            "time": "2021-07-22T15:15:03+00:00"
         }
     ],
     "packages-dev": [
@@ -3878,6 +3878,7 @@
                     "type": "github"
                 }
             ],
+            "abandoned": true,
             "time": "2020-09-28T06:45:17+00:00"
         },
         {
