@@ -1,5 +1,5 @@
 parameters:
-  serializer.cache_dir: '%kernel.cache_dir%'
+  serializer.cache_dir: '%kernel.cache_dir%/serializer'
   serializer.custom_encoders: [ ]
   serializer.custom_decoders: [ ]
   serializer.encoder_factories: { }
