@@ -79,7 +79,7 @@ class HttpValueObjectFactoryTest extends TestCase
         $this->arraySerializer
             ->expects($this->once())
             ->method('deserialize')
-            ->with(['foo' => 'bar', 'biz' => 'baz']);
+            ->with((object) ['foo' => 'bar', 'biz' => 'baz']);
 
         $this->factory->__invoke(stdClass::class);
     }

@@ -74,14 +74,11 @@ class HttpValueObjectFactory
         };
     }
 
-    /**
-     * @return array<mixed>
-     */
-    private function getData(Request $request): string|array
+    private function getData(Request $request): string|object
     {
         return match ($request->getContentType()) {
             'json' => (string) $request->getContent(),
-            default => array_merge(
+            default => (object) array_merge(
                 $request->query->all(),
                 $request->request->all(),
             ),
