@@ -34,8 +34,8 @@ class TestCase extends PHPUnitTestCase
             throw new AssertionFailedError(
                 sprintf(
                     'Failed asserting that exception with message "%s" is thrown',
-                    get_class($this->expectedExceptionObject)
-                )
+                    get_class($this->expectedExceptionObject),
+                ),
             );
         }
     }

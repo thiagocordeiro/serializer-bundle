@@ -24,7 +24,7 @@ class HttpValueObjectFactory
     public function __construct(
         JsonSerializer $jsonSerializer,
         ArraySerializer $arraySerializer,
-        RequestStack $requestStack
+        RequestStack $requestStack,
     ) {
         $this->jsonSerializer = $jsonSerializer;
         $this->arraySerializer = $arraySerializer;
