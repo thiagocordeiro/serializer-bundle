@@ -25,7 +25,7 @@ class ResponseSerializer
     {
         $object = $event->getControllerResult();
 
-        if (false === is_object($object)) {
+        if (false === is_object($object) && false === is_array($object)) {
             return;
         }
 
